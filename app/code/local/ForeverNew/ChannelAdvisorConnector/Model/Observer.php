@@ -19,7 +19,7 @@ class ForeverNew_ChannelAdvisorConnector_Model_Observer {
 
     /**
      * Adjust the shipping description so that middleware can recognise the shipping method
-     * This will fail if CA doesn't give anything like *standard* or *express*
+     * Defaulting to Standard Shipping and update to express shipping once found the magic word
      *
      * @param $observer
      */
@@ -27,13 +27,17 @@ class ForeverNew_ChannelAdvisorConnector_Model_Observer {
         $order = $observer->getEvent()->getOrder();
         if (preg_match('/channeladvisorshipping/i', $order->getShippingMethod())) {
             $currentShippingDescription = $order->getShippingDescription(); // expecting "*standard*" "*express*"
-            if (preg_match('/standard/i', $currentShippingDescription)) {
-                $order->setShippingDescription('Standard Shipping');
-                $order->save();
-            } elseif (preg_match('/express/i', $currentShippingDescription)) {
-                $order->setShippingDescription('Express Shipping');
-                $order->save();
+            $newShippingDescription = 'Standard Shipping';
+            $newShippingPrice = 7.95;
+            if (preg_match('/express/i', $currentShippingDescription)) {
+                $newShippingDescription = 'Express Shipping';
+                $newShippingPrice = 9.95;
             }
+            $order->setShippingDescription($newShippingDescription);
+            $order->setShippingAmount($newShippingPrice);
+            $order->setBaseShippingAmount($newShippingPrice);
+            $order->setGrandTotal($order->getGrandTotal() + $newShippingPrice);
+            $order->save();
         }
     }
 
