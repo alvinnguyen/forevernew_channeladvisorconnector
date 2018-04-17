@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <ForeverNew_ChannelAdvisorConnector>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <ChannelAdvisor_ChannelAdvisorConnector/>
+            </depends>
+        </ForeverNew_ChannelAdvisorConnector>
+    </modules>
+</config>
