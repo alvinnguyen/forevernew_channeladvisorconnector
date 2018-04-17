@@ -36,7 +36,6 @@ class ForeverNew_ChannelAdvisorConnector_Model_Observer {
             $order->setShippingDescription($newShippingDescription);
             $order->setShippingAmount($newShippingPrice);
             $order->setBaseShippingAmount($newShippingPrice);
-            $order->setGrandTotal($order->getGrandTotal() + $newShippingPrice);
             $order->save();
         }
     }
