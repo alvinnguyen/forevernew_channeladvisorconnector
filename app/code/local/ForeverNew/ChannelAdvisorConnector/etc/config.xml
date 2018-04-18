@@ -13,6 +13,7 @@
             <channeladvisor_connector>
                 <rewrite>
                     <export_product_full>ForeverNew_ChannelAdvisorConnector_Model_Export_Product_Full</export_product_full>
+                    <export_product_incremental>ForeverNew_ChannelAdvisorConnector_Model_Export_Product_Incremental</export_product_incremental>
                 </rewrite>
             </channeladvisor_connector>
         </models>
